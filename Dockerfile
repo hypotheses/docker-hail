@@ -1,4 +1,4 @@
-FROM openjdk:8u111-jdk-alpine
+FROM openjdk:8u131-jdk-alpine
 MAINTAINER Shane Husson shane.a.husson@gmail.com
 
 RUN apk add --update \
@@ -25,7 +25,7 @@ RUN mkdir /usr/spark && \
 
 RUN git clone https://github.com/broadinstitute/hail.git ${HAIL_HOME} && \
     cd ${HAIL_HOME} && \
-    git checkout a1d4e7a9099af9ef6e4595eaaa30852fd65a6120 && \
+    git checkout 42a09a3034c996bb1cfae993ee0666dd59ecafa8 && \
     ./gradlew installDist
 
 ENTRYPOINT ["hail"]
