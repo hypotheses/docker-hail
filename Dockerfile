@@ -26,7 +26,7 @@ RUN mkdir /usr/spark && \
 RUN git clone https://github.com/broadinstitute/hail.git ${HAIL_HOME} && \
     cd ${HAIL_HOME} && \
     git checkout 42a09a3034c996bb1cfae993ee0666dd59ecafa8 && \
-    ./gradlew installDist
+    ./gradlew -Dspark.version=2.1.0 shadowJar
 
 ENTRYPOINT ["hail"]
 CMD ["-h"]
