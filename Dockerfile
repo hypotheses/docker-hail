@@ -14,7 +14,9 @@ RUN apk add --update \
 
 ENV SPARK_HOME=/usr/spark/spark-2.1.0-bin-hadoop2.7 \
     HAIL_HOME=/usr/hail \
-    PATH=$PATH:/usr/spark/spark-2.1.0-bin-hadoop2.7/bin:/usr/hail/build/install/hail/bin/
+    PATH=$PATH:/usr/spark/spark-2.1.0-bin-hadoop2.7/bin:/usr/hail/build/install/hail/bin/ \
+    PYTHONPATH="$PYTHONPATH:$HAIL_HOME/python:$SPARK_HOME/python:`echo $SPARK_HOME/python/lib/py4j*-src.zip`" \
+    SPARK_CLASSPATH=$HAIL_HOME/build/libs/hail-all-spark.jar
 
 RUN mkdir /usr/spark && \
     curl -sL --retry 3 \
