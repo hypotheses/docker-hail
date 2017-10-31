@@ -25,10 +25,9 @@ RUN mkdir /usr/spark && \
     | tar x -C /usr/spark && \
     chown -R root:root $SPARK_HOME
 
-RUN git clone https://github.com/broadinstitute/hail.git ${HAIL_HOME} && \
-    cd ${HAIL_HOME} && \
-    git checkout 42a09a3034c996bb1cfae993ee0666dd59ecafa8 && \
-    ./gradlew -Dspark.version=2.1.0 shadowJar
+RUN cd ${HAIL_HOME} && \
+    wget https://storage.googleapis.com/hail-common/distributions/0.1/Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip && \
+    unzip Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip
 
 ENTRYPOINT ["hail"]
 CMD ["-h"]
