@@ -25,12 +25,22 @@ RUN mkdir /usr/spark && \
     | tar x -C /usr/spark && \
     chown -R root:root $SPARK_HOME
 
-RUN mkdir /usr/hail && cd ${HAIL_HOME} && \
-    wget https://storage.googleapis.com/hail-common/distributions/0.1/Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip && \
-    unzip Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip
+RUN mkdir /usr/hail && \
+cd ${HAIL_HOME} && \
+curl -sL --retry 3 \
+"https://storage.googleapis.com/hail-common/distributions/0.1/Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip" -o Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip && \
+unzip Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip
 
-RUN apk add python py-pip python-dev && \
-    pip install jupyter pyspark
+RUN apk add --update \
+    python \
+    python-dev \
+    py-pip
 
-ENTRYPOINT ["hail"]
-CMD ["-h"]
+RUN pip install jupyter numpy pandas seaborn matplotlib
+
+RUN pip install pyspark
+
+EXPOSE 8888
+
+ENTRYPOINT ["jhail"]
+# CMD ["-h"]
