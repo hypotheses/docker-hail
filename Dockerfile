@@ -25,12 +25,12 @@ RUN mkdir /usr/spark && \
     | tar x -C /usr/spark && \
     chown -R root:root $SPARK_HOME
 
-RUN cd ${HAIL_HOME} && \
+RUN mkdir /usr/hail && cd ${HAIL_HOME} && \
     wget https://storage.googleapis.com/hail-common/distributions/0.1/Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip && \
     unzip Hail-0.1-2372f0ee9d52-Spark-2.1.0.zip
 
 RUN apk add python py-pip python-dev && \
-    pip install jupyter
+    pip install jupyter pyspark
 
 ENTRYPOINT ["hail"]
 CMD ["-h"]
