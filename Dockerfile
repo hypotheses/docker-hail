@@ -10,7 +10,10 @@ RUN apk add --update \
     gzip \
     make \
     libc6-compat \
-    tar
+    tar \
+    freetype-dev \
+    libjpeg-turbo-dev \
+    libpng-dev
 
 ENV SPARK_HOME=/usr/spark/spark-2.1.0-bin-hadoop2.7 \
     HAIL_HOME=/usr/hail \
@@ -36,9 +39,7 @@ RUN apk add --update \
     python-dev \
     py-pip
 
-RUN pip install jupyter numpy pandas seaborn matplotlib
-
-RUN pip install pyspark
+RUN pip install jupyter numpy pandas matplotlib seaborn pyspark
 
 EXPOSE 8888
 
