@@ -39,7 +39,7 @@ RUN apk add --update \
     python-dev \
     py-pip
 
-RUN pip install jupyter numpy pandas matplotlib seaborn pyspark
+RUN pip install jupyter numpy pandas matplotlib pyspark
 
 EXPOSE 8888
 
